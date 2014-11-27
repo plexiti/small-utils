@@ -1,1 +1,1 @@
-codesign -s Selbstsignierter Code -f  --deep #  -> Pfad zum *.app
+codesign -s "Selbstsignierter Code" -f "$1" --deep # $1 -> Pfad zum *.app
