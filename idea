@@ -1,0 +1,19 @@
+function idea_open {
+  open $1 -a /Applications/IntelliJ\ IDEA\ 14.app/
+}
+if [ ! -z "$1" ]; then
+  idea_open $1
+elif [ ! -z "$(ls ./*.ipr 2> /dev/null)" ]; then
+  idea_open ./*.ipr
+elif [ ! -z "$(ls ./.idea 2> /dev/null)" ]; then
+  idea_open .
+elif [ ! -z "$(ls ./pom.xml 2> /dev/null)" ]; then
+  idea_open pom.xml
+elif [ ! -z "`if [ -e application.properties ]; then cat application.properties | grep app.grails.version | cut -d "=" -f 2 2> /dev/null; fi`" ]; then
+  source "/Users/martin/.gvm/bin/gvm-init.sh"
+  gvm use grails `if [ -e application.properties ]; then cat application.properties | grep app.grails.version | cut -d "=" -f 2 2> /dev/null; fi`
+  grails integrate-with --intellij; sleep 1
+  idea_open ./*.ipr
+else
+  idea_open
+fi
