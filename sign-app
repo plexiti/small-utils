@@ -1,0 +1,1 @@
+codesign -s Selbstsignierter Code -f  --deep #  -> Pfad zum *.app
